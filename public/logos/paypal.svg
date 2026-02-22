@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">PayPal</title>
+  <desc id="desc">Logo style PayPal</desc>
+  <rect width="256" height="256" rx="24" fill="#f5f7fa"/>
+  <path d="M84 62h53c27 0 43 14 43 37 0 28-22 44-53 44h-20l-9 51H61z" fill="#003087"/>
+  <path d="M98 74h46c20 0 31 9 31 24 0 19-15 31-36 31h-18l-6 34H87z" fill="#009cde"/>
+  <text x="128" y="212" text-anchor="middle" fill="#003087" font-family="Arial, sans-serif" font-size="30" font-weight="700">PayPal</text>
+</svg>

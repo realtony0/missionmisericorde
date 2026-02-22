@@ -1,101 +1,164 @@
+"use client";
+
+import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import KeyFigures from "@/components/KeyFigures";
+import Lightbox from "@/components/Lightbox";
 
-export default function Home() {
+const GALLERY = [
+  "/images/photo-1.jpg",
+  "/images/photo-2.jpg",
+  "/images/photo-3.jpg",
+  "/images/photo-4.jpg",
+  "/images/photo-5.jpg",
+  "/images/photo-6.jpg",
+  "/images/photo-7.jpg",
+  "/images/photo-8.jpg",
+  "/images/photo-9.jpg",
+  "/images/photo-10.jpg",
+  "/images/photo-11.jpg",
+];
+
+const domains = [
+  {
+    title: "Ouvrages hydrauliques",
+    description: "Puits et mini-forages pour l'accès durable à l'eau potable.",
+  },
+  {
+    title: "Mosquées",
+    description: "Construction et rénovation de lieux de culte utiles à toute la communauté.",
+  },
+  {
+    title: "Éducation islamique",
+    description: "Soutien aux internats coraniques, aux élèves et aux enseignants.",
+  },
+  {
+    title: "Environnement",
+    description: "Plantation d'arbres et actions de préservation des ressources.",
+  },
+];
+
+export default function HomePage() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0">
+          <Image src="/images/photo-4.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" />
+          <div className="absolute inset-0 bg-dark/70" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="page-shell relative z-10 flex min-h-[72vh] flex-col justify-center py-14 sm:py-20">
+          <span className="eyebrow w-fit border border-white/30 bg-white/10 text-white">
+            Association caritative au Sénégal
+          </span>
+          <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+            Sadaqa jariya utile, traçable et durable
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/90 sm:text-xl">
+            Mission Miséricorde construit des ouvrages qui servent dans le temps: puits, mini-forages, mosquées, internats et actions environnementales.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/faire-un-don" className="btn-accent text-base">
+              Faire un don
+            </Link>
+            <Link href="/travaux-en-cours" className="btn-outline border-white/50 bg-white/10 text-white hover:bg-white/10">
+              Suivre les travaux
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="page-shell py-12 sm:py-14">
+        <div className="page-hero">
+          <span className="eyebrow">Qui sommes-nous</span>
+          <h2 className="page-title mt-4">Mission Miséricorde</h2>
+          <p className="page-subtitle max-w-4xl">
+            Mission Miséricorde est une association caritative à but non lucratif, créée le <strong>24 avril 2025</strong>. Nous organisons des projets de <strong>sadaqa jariya</strong> avec suivi photo, historique des étapes et publication des inaugurations.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-14">
+        <div className="page-shell">
+          <div className="mb-8 flex flex-col items-start gap-2 sm:mb-10 sm:items-center">
+            <span className="eyebrow">Impact</span>
+            <h2 className="section-title sm:text-center">
+            Chiffres clés
+            </h2>
+          </div>
+          <KeyFigures />
+        </div>
+      </section>
+
+      <section className="page-shell py-12 sm:py-14">
+        <div className="mb-8 flex flex-col items-start gap-2 sm:items-center">
+          <span className="eyebrow">Notre mission</span>
+          <h2 className="section-title sm:text-center">Nos domaines d&apos;action</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {domains.map((d) => (
+            <article key={d.title} className="surface-card">
+              <h3 className="text-2xl font-bold">{d.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed">{d.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-14">
+        <div className="page-shell">
+          <div className="mb-8 flex flex-col items-start gap-2 sm:items-center">
+            <span className="eyebrow">Galerie</span>
+            <h2 className="section-title sm:text-center">Réalisations en images</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {GALLERY.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                className={`relative overflow-hidden rounded-xl border border-primary/20 transition hover:opacity-95 ${
+                  i % 5 === 0 ? "col-span-2 row-span-2 aspect-[16/10] sm:col-span-1 sm:row-span-1 sm:aspect-[4/3]" : "aspect-[4/3]"
+                }`}
+                onClick={() => {
+                  setLightboxIndex(i);
+                  setLightboxOpen(true);
+                }}
+              >
+                <Image
+                  src={src}
+                  alt={`Réalisation Mission Miséricorde ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {lightboxOpen && (
+        <Lightbox
+          images={GALLERY}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxOpen(false)}
+          onPrev={() => setLightboxIndex((i) => (i - 1 + GALLERY.length) % GALLERY.length)}
+          onNext={() => setLightboxIndex((i) => (i + 1) % GALLERY.length)}
+        />
+      )}
+
+      <section className="page-shell pb-14 pt-4 sm:pb-16">
+        <div className="surface-card-muted text-center">
+          <h2 className="text-2xl font-bold">Transparence</h2>
+          <p className="mx-auto mt-3 max-w-3xl text-sm sm:text-base">
+            Projets numérotés, photos vérifiables et mises à jour régulières. Les financements sont suivis via cagnottes ponctuelles et dons libres permanents.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

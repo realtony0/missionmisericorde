@@ -11,10 +11,13 @@
 
 # next.js
 /.next/
+/.next_cache_broken_*/
 /out/
 
 # production
 /build
+/prisma/*.db
+/prisma/*.db-journal
 
 # misc
 .DS_Store
@@ -26,6 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel

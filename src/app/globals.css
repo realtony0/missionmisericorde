@@ -3,25 +3,127 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f7f5;
+  --background-rgb: 247 247 245;
+  --foreground: #24384a;
+  --foreground-rgb: 36 56 74;
+  --primary: #1f6a45;
+  --primary-rgb: 31 106 69;
+  --accent: #c7a24d;
+  --accent-rgb: 199 162 77;
+  --cream: #f7f7f5;
+  --cream-rgb: 247 247 245;
+  --dark: #1d3448;
+  --dark-rgb: 29 52 72;
+  --ink: #34526a;
+  --ink-rgb: 52 82 106;
+  --surface: #ffffff;
+  --surface-rgb: 255 255 255;
+  --surface-strong: #eef2f5;
+  --surface-strong-rgb: 238 242 245;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-100%);
+  transition: transform 0.2s;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-dark;
+  }
+
+  p {
+    color: rgba(35, 72, 99, 0.9);
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .page-hero {
+    @apply rounded-2xl border border-primary/20 bg-white p-6 sm:p-8 md:p-10;
+  }
+
+  .page-title {
+    @apply text-3xl sm:text-4xl md:text-[2.7rem] leading-tight;
+  }
+
+  .page-subtitle {
+    @apply mt-3 text-base sm:text-lg md:text-[1.15rem] leading-relaxed text-ink/80;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wider uppercase text-primary;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-primary/20 bg-white p-5 sm:p-6;
+  }
+
+  .surface-card-muted {
+    @apply rounded-2xl border border-primary/10 bg-surface-strong p-5 sm:p-6;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-[48px] items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary/90 focus-visible:outline-primary;
+  }
+
+  .btn-accent {
+    @apply inline-flex min-h-[48px] items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-dark transition hover:bg-accent/90 focus-visible:outline-accent;
+  }
+
+  .btn-outline {
+    @apply inline-flex min-h-[48px] items-center justify-center rounded-xl border border-primary/30 bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/5;
+  }
+
+  .section-title {
+    @apply text-2xl sm:text-3xl;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
