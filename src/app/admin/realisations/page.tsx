@@ -18,6 +18,12 @@ export default async function AdminRealisationsPage() {
       <p className="text-dark/70 text-sm mb-4">
         Modifier les réalisations (numéro, date, localisation, photos, vidéos, description) depuis cette liste.
       </p>
+      <Link
+        href="/admin/realisations/new"
+        className="inline-block mb-4 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90"
+      >
+        Nouvelle réalisation
+      </Link>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
