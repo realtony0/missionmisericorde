@@ -103,14 +103,13 @@ async function main() {
   }
 
   const adminEmail = "admin@mission-misericorde.org";
-  const existing = await prisma.user.findUnique({ where: { email: adminEmail } });
-  if (!existing) {
-    const hash = await bcrypt.hash("admin123", 10);
-    await prisma.user.create({
-      data: { email: adminEmail, name: "Admin", password: hash },
-    });
-    console.log("Admin user created: admin@mission-misericorde.org / admin123");
-  }
+  const hash = await bcrypt.hash("280403", 10);
+  await prisma.user.upsert({
+    where: { email: adminEmail },
+    create: { email: adminEmail, name: "Admin", password: hash },
+    update: { password: hash },
+  });
+  console.log("Admin user ready: admin@mission-misericorde.org / 280403");
 
   console.log("Seed done: achievements + settings + admin");
 }
