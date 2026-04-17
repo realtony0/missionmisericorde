@@ -3,7 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db";
 import type { Adapter } from "next-auth/adapters";
-import bcrypt from "bcryptjs";
+
+const ADMIN_CODE = "150803";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -13,17 +14,15 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        code: { label: "Code", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
-        if (!user || !user.password) return null;
-        const ok = await bcrypt.compare(credentials.password, user.password);
-        if (!ok) return null;
+        if (!credentials?.code) return null;
+        if (credentials.code !== ADMIN_CODE) return null;
+
+        const user = await prisma.user.findFirst();
+        if (!user) return null;
+
         return { id: user.id, email: user.email, name: user.name, image: user.image };
       },
     }),
