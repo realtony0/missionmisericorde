@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -103,13 +102,11 @@ async function main() {
   }
 
   const adminEmail = "admin@mission-misericorde.org";
-  const hash = await bcrypt.hash("280403", 10);
   await prisma.user.upsert({
     where: { email: adminEmail },
-    create: { email: adminEmail, name: "Admin", password: hash },
-    update: { password: hash },
+    create: { email: adminEmail, name: "Admin" },
+    update: {},
   });
-  console.log("Admin user ready: admin@mission-misericorde.org / 280403");
 
   console.log("Seed done: achievements + settings + admin");
 }
